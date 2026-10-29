@@ -44,19 +44,22 @@ void consultaConta(ListaDupla *D, int opcao)
         {
             do
             {
-                system("cls");
+                if (i->conteudo.status == 1)
+                {
+                    system("cls");
 
-                tela();
-                telaCadastrar();
+                    tela();
+                    telaCadastrar();
 
-                conta = i->conteudo;
+                    conta = i->conteudo;
 
-                mostraConta(conta, opcao, 0);
+                    mostraConta(conta, opcao, 0);
 
-                limpaMensagem();
-                gotoxy(1, 22);
-                printf("Aperte ENTER: ");
-                getch();
+                    limpaMensagem();
+                    gotoxy(1, 22);
+                    printf("Aperte ENTER: ");
+                    getch();
+                }
 
                 i = i->prox;
 
@@ -87,14 +90,24 @@ void consultaConta(ListaDupla *D, int opcao)
 
                     if (result != NULL)
                     {
-                        conta = result->conteudo;
+                        if (result->conteudo.status == 1)
+                        {
+                            conta = result->conteudo;
                         
-                        mostraConta(conta, opcao, 0);
+                            mostraConta(conta, opcao, 0);
 
-                        limpaMensagem();
-                        gotoxy(1, 22);
-                        printf("Aperte ENTER: ");
-                        getch();
+                            limpaMensagem();
+                            gotoxy(1, 22);
+                            printf("Aperte ENTER: ");
+                            getch();
+                        }
+                        else
+                        {
+                            limpaMensagem();
+                            gotoxy(1, 22);
+                            printf("Conta desativada! Aperte ENTER: ");
+                            getch();
+                        }
                     }   
                     else
                     {
@@ -126,43 +139,64 @@ void consultaConta(ListaDupla *D, int opcao)
 
             i = D->pri;
 
-            for (y = 6; i != NULL; y++)
+            y = 6;
+
+            do
             {
                 conta = i->conteudo;
 
-                saldoTot += conta.vl_saldo;
-                limiteTot += conta.vl_limite;
-
-                if (y == 19)
+                if (conta.status == 1)
                 {
-                    limpaMensagem();
-                    gotoxy(1, 22);
-                    printf("Aperte ENTER para proxima tela: ");
-                    getch();
+                    saldoTot += conta.vl_saldo;
+                    limiteTot += conta.vl_limite;
 
-                    system("cls");
-                    tela();
+                    if (y == 21)
+                    {
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Aperte ENTER para proxima tela: ");
+                        getch();
 
-                    y = 6;
+                        system("cls");
+                        tela();
 
-                    mostraConta(conta, opcao, y);
+                        y = 6;
 
-                    cabecalhoContas();
-                }
-                else
-                {
-                    mostraConta(conta, opcao, y);
+                        mostraConta(conta, opcao, y);
+
+                        cabecalhoContas();
+                    }
+                    else
+                    {
+                        mostraConta(conta, opcao, y);
+                        y++;
+                    }
                 }
 
                 i = i->prox;
-            }
 
-            gotoxy(41, y);
-            printf("------------ ----------- -----------");
-            gotoxy(41, y + 1);
-            printf("Saldo Total: R$ %.2f", saldoTot);
-            gotoxy(66, y + 1);
-            printf("R$  %.2f", limiteTot);
+            } while (i != NULL);
+
+            if (y > 19)
+            {
+                limpaMensagem();
+                gotoxy(1, 22);
+                printf("Aperte ENTER para proxima tela: ");
+                getch();
+
+                system("cls");
+                tela();
+
+                y = 6;
+
+                cabecalhoContas();
+                rodapeConta(saldoTot, limiteTot, y);
+            }
+            else
+            {
+                cabecalhoContas();
+                rodapeConta(saldoTot, limiteTot, y);
+            }
 
             limpaMensagem();
             gotoxy(1, 22);

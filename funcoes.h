@@ -117,4 +117,6 @@ void alterarConta(ListaDupla *D);
 
 void removerConta(ListaDupla *D, int opcao);
 
+void rodapeConta(double saldoTot, double limiteTot, int y);
+
 #endif
