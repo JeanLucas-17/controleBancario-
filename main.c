@@ -43,13 +43,15 @@ int main()
                 menuConta(&D);
 
                 break;
+
             case 2:
-                
+
                 break;
             case 3:
                 salvarDiscoConta(&D);
 
                 break;
+
             default:
                 erro();
 

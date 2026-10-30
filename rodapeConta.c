@@ -17,5 +17,5 @@ void rodapeConta(double saldoTot, double limiteTot, int y)
     gotoxy(41, y + 1);
     printf("Saldo Total: R$ %.2f", saldoTot);
     gotoxy(66, y + 1);
-    printf("R$  %.2f", limiteTot);
+    printf("R$ %.2f", limiteTot);
 }

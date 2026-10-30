@@ -19,6 +19,7 @@ void cadastrarConta(ListaDupla *D, int opcao)
 
     regConta conta;
 
+    int tipo;
     int resp;
     int pos;
     int x;
@@ -58,9 +59,48 @@ void cadastrarConta(ListaDupla *D, int opcao)
                 fflush(stdin);
                 fgets(conta.numero_conta, 20, stdin);
 
-                gotoxy(41, 12);
-                fflush(stdin);
-                fgets(conta.tipo_conta, 20, stdin);
+                do
+                {
+                    limpaMensagem();
+                    gotoxy(1, 22);
+                    printf("Utilizar: 1 - Corrente / 2 - Poupanca / 3 - Cartao Credito");
+
+                    gotoxy(41, 12);
+                    scanf("%d", &tipo);
+
+                    if (tipo < 1 || tipo > 3)
+                    {
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Opcao Invalida! Aperte ENTER: ");
+                        getch();
+
+                        gotoxy(41, 12);
+                        printf("                                     ");
+                    }
+                } while (tipo < 1 || tipo > 3);
+
+                if (tipo == 1)
+                {
+                    strcpy(conta.tipo_conta, "Corrente");
+
+                    gotoxy(42, 12);
+                    printf(" - Corrente");
+                }
+                else if (tipo == 2)
+                {
+                    strcpy(conta.tipo_conta, "Poupanca");
+
+                    gotoxy(42, 12);
+                    printf(" - Poupanca");
+                }
+                else
+                {
+                    strcpy(conta.tipo_conta, "Cartao Credito");
+
+                    gotoxy(42, 12);
+                    printf(" - Cartao Credito");
+                }
 
                 gotoxy(41, 14);
                 scanf("%lf", &conta.vl_saldo);
@@ -69,7 +109,9 @@ void cadastrarConta(ListaDupla *D, int opcao)
                 scanf("%lf", &conta.vl_limite);
 
                 gotoxy(41, 18);
-                scanf("%d", &conta.status);
+                printf("1");
+
+                conta.status = 1;
 
                 limpaMensagem();
                 gotoxy(1, 22);

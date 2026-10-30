@@ -21,6 +21,7 @@ void consultaConta(ListaDupla *D, int opcao)
     double limiteTot;
 
     int codigo;
+    int resp;
 
     int y;
 
@@ -57,18 +58,29 @@ void consultaConta(ListaDupla *D, int opcao)
 
                     limpaMensagem();
                     gotoxy(1, 22);
-                    printf("Aperte ENTER: ");
-                    getch();
+                    printf("Deseja continuar? (1 - SIM / 2 - NAO): ");
+                    scanf("%d", &resp);
+                    
+                    while (resp != 1 && resp != 2)
+                    {
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Opcao Invalida! Deseja continuar? (1 - SIM / 2 - NAO): ");
+                        scanf("%d", &resp);
+                    }
                 }
 
                 i = i->prox;
 
-            } while (i != NULL);
+            } while (i != NULL && resp == 1);
 
-            limpaMensagem();
-            gotoxy(1, 22);
-            printf("Fim das contas! Aperte ENTER: ");
-            getch();
+            if (resp == 1)
+            {
+                limpaMensagem();
+                gotoxy(1, 22);
+                printf("Fim das contas! Aperte ENTER: ");
+                getch();
+            }
         }
         else if (opcao == 2)
         {
@@ -82,9 +94,11 @@ void consultaConta(ListaDupla *D, int opcao)
                 limpaMensagem();
                 gotoxy(1, 22);
                 printf("Codigo da conta / OBS (0 para sair): ");
+
+                gotoxy(41, 4);
                 scanf("%d", &codigo);
 
-                if (codigo != 0)
+                if (codigo != 0 && codigo > 0)
                 {
                     result = pesquisaCodigoConta(D, codigo);
 
@@ -116,6 +130,13 @@ void consultaConta(ListaDupla *D, int opcao)
                         printf("Codigo nao cadastrado! Aperte ENTER: ");
                         getch();
                     }
+                }
+                else if (codigo < 0)
+                {
+                    limpaMensagem();
+                    gotoxy(1, 22);
+                    printf("Codigo Invalido! Aperte ENTER: ");
+                    getch();
                 }
             } while(codigo != 0);
         }
