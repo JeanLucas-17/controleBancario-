@@ -123,4 +123,6 @@ void menuMovi(ListaSimples *S);
 
 void telaMovi();
 
+void telaTransferencia();
+
 #endif
