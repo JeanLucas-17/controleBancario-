@@ -9,7 +9,7 @@
 */
 #include "funcoes.h"
 
-void menuMovi(ListaSimples *S)
+void menuMovi(ListaDupla *D, ListaSimples *S)
 {
     int opcao;
 
@@ -27,12 +27,18 @@ void menuMovi(ListaSimples *S)
         switch (opcao)
         {
             case 1:
-                
-            moviDebitoeCredito(S);
+                moviDebitoeCredito(S);
+
                 break;
         
+            case 2:
+                transferenciaConta(D, S);
+
+                break;
+
             default:
                 erro();
+                
                 break;
         }
     }while (opcao != 4);

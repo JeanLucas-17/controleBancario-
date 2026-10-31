@@ -50,7 +50,7 @@ typedef struct
     int sequencial;
     int codigo_conta;
     char dt_movimento[11];
-    char tp_movimento[15];
+    char tp_movimento[30];
     char ds_favorecido[50];
     double vl_movimento;
     double vl_saldo;
@@ -119,10 +119,12 @@ void removerConta(ListaDupla *D, int opcao);
 
 void rodapeConta(double saldoTot, double limiteTot, int y);
 
-void menuMovi(ListaSimples *S);
+void menuMovi(ListaDupla *D, ListaSimples *S);
 
 void telaMovi();
 
 void telaTransferencia();
+
+void transferenciaConta(ListaDupla *D, ListaSimples *S);
 
 #endif

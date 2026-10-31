@@ -32,7 +32,7 @@ void alterarConta(ListaDupla *D)
         gotoxy(41, 4);
         scanf("%d", &codigo);
 
-        if (codigo != 0 && codigo > 0)
+        if (codigo > 0)
         {
             limpaMensagem();
 

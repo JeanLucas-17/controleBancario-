@@ -17,11 +17,15 @@ int main()
     ListaDupla D;
     ListaSimples S;
 
+    regMovimentacao mov;
+
+    mov.sequencial = 0;
+
     D.pri = NULL;
     D.ult = NULL;
 
     S.pri = NULL;
-    S.pri = NULL;
+    S.ult = NULL;
 
     system("color 0a");
     
@@ -45,8 +49,10 @@ int main()
                 break;
 
             case 2:
-                menuMovi(&S);
+                menuMovi(&D, &S);
+
                 break;
+
             case 3:
                 salvarDiscoConta(&D);
 
