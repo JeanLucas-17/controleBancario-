@@ -19,8 +19,6 @@ int main()
 
     regMovimentacao mov;
 
-    mov.sequencial = 0;
-
     D.pri = NULL;
     D.ult = NULL;
 

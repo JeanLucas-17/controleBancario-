@@ -15,7 +15,7 @@ void transferenciaConta(ListaDupla*D, ListaSimples *S)
     ApontConta resultDestino;
     ApontConta resultOrigem;
     regConta contaDestino;
-    regConta contaOrigem;regConta contaOrigem;
+    regConta contaOrigem;
 
     regMovimentacao mov;
     ApontMov p;
@@ -144,8 +144,8 @@ void transferenciaConta(ListaDupla*D, ListaSimples *S)
                 novoSaldoOr = contaOrigem.vl_saldo - mov.vl_movimento;
                 novoSaldoDe = contaDestino.vl_saldo + mov.vl_movimento;
 
-                contaOrigem.vl_saldo = novoSaldoOr;
-                contaDestino.vl_saldo = novoSaldoDe;
+                resultOrigem->conteudo.vl_saldo = novoSaldoOr;
+                resultDestino->conteudo.vl_saldo = novoSaldoDe;
 
                 gotoxy(19, 15);
                 printf("R$ %.2f", novoSaldoOr);
@@ -155,7 +155,7 @@ void transferenciaConta(ListaDupla*D, ListaSimples *S)
 
                 gotoxy(39, 18);
                 scanf("%s", &mov.dt_movimento);
-
+                
                 mov.sequencial++;
                 strcpy(mov.tp_movimento, "Transferencia Entre Contas");
                 mov.codigo_conta = contaOrigem.codigo_conta;
@@ -175,6 +175,7 @@ void transferenciaConta(ListaDupla*D, ListaSimples *S)
                 else
                 {
                     S->ult->prox = p;
+                    S->ult = p;
                     p->prox = NULL;
                 }
             }
