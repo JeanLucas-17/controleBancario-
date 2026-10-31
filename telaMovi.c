@@ -12,12 +12,12 @@
 
 void telaMovi()
 {
-    gotoxy(26, 9);
+    gotoxy(24, 9);
     printf("1 - Movimentacao do Debito e Credito");
-    gotoxy(26, 11);
+    gotoxy(24, 11);
     printf("2 - Trasferencia entre Contas Bancarias");
-    gotoxy(26, 13);
+    gotoxy(24, 13);
     printf("3 - Consultar Movimentacoes Bancarias");
-    gotoxy(26, 15);
+    gotoxy(24, 15);
     printf("4 - Retornar ao Menu Anterior");
 }
