@@ -45,7 +45,7 @@ int main()
                 break;
 
             case 2:
-
+                menuMovi(&S);
                 break;
             case 3:
                 salvarDiscoConta(&D);

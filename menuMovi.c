@@ -16,8 +16,8 @@ void menuMovi(ListaSimples *S)
     do
     {
         system("cls");
-        tela();
-        telaMovimentacao();
+        tela();        
+        telaMovi();
         limpaMensagem();
 
         gotoxy(1,22);
@@ -26,13 +26,14 @@ void menuMovi(ListaSimples *S)
 
         switch (opcao)
         {
-        case 1:
-
-            break;
+            case 1:
+                
+            moviDebitoeCredito(S);
+                break;
         
-        default:
-            erro();
-            break;
+            default:
+                erro();
+                break;
         }
     }while (opcao != 4);
 }
