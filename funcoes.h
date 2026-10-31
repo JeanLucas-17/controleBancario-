@@ -119,4 +119,8 @@ void removerConta(ListaDupla *D, int opcao);
 
 void rodapeConta(double saldoTot, double limiteTot, int y);
 
+void menuMovi(ListaSimples *S);
+
+void telaMovi();
+
 #endif

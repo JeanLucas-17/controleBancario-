@@ -1,0 +1,38 @@
+/*
+    AUTOR......: FELIPE GABRIEL DA SILVA TRASSI
+    DATA.......: 29/10/2026
+
+    GRUPO......: JEAN LUCAS RA: 438971-2026
+                 FELIPE GABRIEL RA: 434906-2026
+
+    OBJETIVO...: FUNCAO QUE MOSTRA AS OPCOES DA MOVIMENTAÇÃO
+*/
+#include "funcoes.h"
+
+void menuMovi(ListaSimples *S)
+{
+    int opcao;
+
+    do
+    {
+        system("cls");
+        tela();
+        telaMovimentacao();
+        limpaMensagem();
+
+        gotoxy(1,22);
+        printf("Opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao)
+        {
+        case 1:
+
+            break;
+        
+        default:
+            erro();
+            break;
+        }
+    }while (opcao != 4);
+}
