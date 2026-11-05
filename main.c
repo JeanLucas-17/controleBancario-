@@ -26,7 +26,7 @@ int main()
     system("color 0a");
     
     lerDiscoConta(&D);
-    
+
     do
     {
         system("cls");
@@ -45,7 +45,7 @@ int main()
                 break;
 
             case 2:
-                menuMovi(&S);
+                menuMovi(&S,&D);
                 break;
             case 3:
                 salvarDiscoConta(&D);

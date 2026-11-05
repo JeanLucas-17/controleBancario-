@@ -10,10 +10,158 @@
 
 #include "funcoes.h"
 
-void moviDebitoeCredito(ListaSimples *S)
+void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
 {
-    system("cls");
-    tela();
-    telaDebitoeCredito();
-    getch();
+    int y;
+    ApontConta result;
+    regConta conta;
+    regMovimentacao movi;
+    ApontMov p;
+    float soma;
+    int resp;
+    soma = 0;
+    do
+    {
+
+        system("cls");
+        tela();
+        telaDebitoeCredito();
+        limpaMensagem();
+        gotoxy(1,22);
+        printf("Digite 0 para sair.: ");
+        gotoxy(37,6);
+        scanf("%d", &movi.codigo_conta);
+        
+        if(movi.codigo_conta > 0)
+        {
+            limpaMensagem();
+            result = pesquisaCodigoConta(D, movi.codigo_conta);
+            if(result != NULL)
+            {
+                conta = result->conteudo;
+
+                gotoxy(37,7);
+                printf(conta.banco);
+
+                gotoxy(37,8);
+                printf(conta.agencia);
+
+                gotoxy(37,9);
+                printf(conta.numero_conta);
+
+                gotoxy(37,10);
+                printf(conta.tipo_conta);
+
+                gotoxy(37, 11);
+                printf("%.2f", conta.vl_saldo);
+
+                gotoxy(37, 12);
+                printf("%.2f", conta.vl_limite);
+
+                gotoxy(37, 13);
+                printf("%.2f", conta.vl_saldo + conta.vl_limite);
+                
+                gotoxy(37, 15);
+                fflush(stdin);
+                fgets(movi.dt_movimento, 11, stdin);
+                
+                do
+                {
+                    limpaMensagem();
+                    gotoxy(1,22);
+                    printf("Utilizar.. 1 - Debito 2 - Credito");
+                    gotoxy(37, 16);
+                    scanf("%d", &y);
+                    if(y < 1 && y > 2)
+                    {
+                        limpaMensagem();
+                        gotoxy(1,22);
+                        printf("Opcao invalida.. Aperte ENTER");
+                        getch();
+                    }
+                }while(y < 1 && y > 2);
+                if(y == 1)
+                {
+                    strcpy(movi.tp_movimento, "Debito");
+                    gotoxy(39,16);
+                    printf("- Debito");
+                }
+                else
+                {
+                    strcpy(movi.tp_movimento, "Credito");
+                    gotoxy(39,16);
+                    printf("- Credito");
+                }
+
+                limpaMensagem();
+                gotoxy(37, 17);
+                fflush(stdin);
+                fgets(movi.ds_favorecido, 50, stdin);
+
+                do
+                {
+                    gotoxy(37, 18);
+                    scanf("%lf", &movi.vl_movimento);
+                    if(movi.vl_movimento > conta.vl_saldo + conta.vl_limite)
+                    {
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Saldo e Limite Insuficiente...");
+                    }
+                }
+                while(movi.vl_movimento > conta.vl_saldo + conta.vl_limite);
+
+                limpaMensagem();
+                gotoxy(1,22);
+                printf("Deseja Salvar a movimentação.. 1 - Sim - 2 - Nao");
+                scanf("%d", &resp);
+
+                if(resp == 1)
+                {
+                    if(y == 1)
+                    {
+                        result->conteudo.vl_saldo = movi.vl_movimento - conta.vl_saldo;
+                    }
+                    else
+                    {
+                        result->conteudo.vl_saldo = movi.vl_movimento + conta.vl_saldo;
+                    }
+
+                    gotoxy(37, 19);
+                    printf("%lf",conta.vl_saldo);
+
+                    p = (ApontMov)malloc(sizeof(TipoItemMov));
+                    movi.vl_saldo = result->conteudo.vl_saldo;
+                    p->conteudo = movi;
+                    p->prox = NULL;
+                    if(S->pri == NULL)
+                    {
+                        S->pri = p;
+                        S->ult = p;
+                    }
+                    else 
+                    {
+                        S->ult->prox = p;
+                        S->ult = p;
+                    }
+                }
+
+            }
+            else
+            {
+                limpaMensagem();
+                gotoxy(1,22);
+                printf("Codigo nao cadastrado! Aperte ENTER");
+                getch();
+            }
+        }
+        else if(conta.codigo_conta < 0 )
+        {
+            limpaMensagem();
+            gotoxy(1, 22);
+            printf("Codigo Invalido! Aperte ENTER: ");
+            getch();
+        }
+        
+    }while (conta.codigo_conta != 0);
 }

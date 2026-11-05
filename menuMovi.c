@@ -9,7 +9,7 @@
 */
 #include "funcoes.h"
 
-void menuMovi(ListaSimples *S)
+void menuMovi(ListaSimples *S, ListaDupla *D)
 {
     int opcao;
 
@@ -28,7 +28,7 @@ void menuMovi(ListaSimples *S)
         {
             case 1:
                 
-            moviDebitoeCredito(S);
+                moviDebitoeCredito(S,D);
                 break;
         
             default:

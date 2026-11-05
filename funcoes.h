@@ -119,10 +119,13 @@ void removerConta(ListaDupla *D, int opcao);
 
 void rodapeConta(double saldoTot, double limiteTot, int y);
 
-void menuMovi(ListaSimples *S);
+void menuMovi(ListaSimples *S, ListaDupla *D);
 
 void telaMovi();
 
-void telaTransferencia();
+void telaDebitoeCredito();
+
+void moviDebitoeCredito(ListaSimples *S, ListaDupla *D);
+
 
 #endif
