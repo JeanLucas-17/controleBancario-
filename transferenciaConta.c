@@ -78,7 +78,7 @@ void transferenciaConta(ListaDupla *D, ListaSimples *S)
 
                     limpaMensagem();
                     gotoxy(1, 22);
-                    printf("OBS (0 para sair): ");
+                    printf("Digite 0 para sair");
 
                     gotoxy(59, 7);
                     scanf("%d", &movDestino.codigo_conta);
@@ -141,12 +141,17 @@ void transferenciaConta(ListaDupla *D, ListaSimples *S)
 
                     do
                     {
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Digite 0 para sair");
+
                         gotoxy(39, 17);
                         printf("                                     ");
+
                         gotoxy(39, 17);
                         scanf("%lf", &vl_movimento);
 
-                        if (vl_movimento > (contaOrigem.vl_saldo + contaOrigem.vl_limite) || vl_movimento < 1)
+                        if (vl_movimento > (contaOrigem.vl_saldo + contaOrigem.vl_limite) || vl_movimento < 0)
                         {
                             limpaMensagem();
                             gotoxy(1, 22);
@@ -156,62 +161,65 @@ void transferenciaConta(ListaDupla *D, ListaSimples *S)
 
                         limpaMensagem();
 
-                    } while (vl_movimento > (contaOrigem.vl_saldo + contaOrigem.vl_limite) || vl_movimento < 1);
+                    } while (vl_movimento > (contaOrigem.vl_saldo + contaOrigem.vl_limite) || vl_movimento < 0);
 
-                    resultOrigem->conteudo.vl_saldo -= vl_movimento;
-                    resultDestino->conteudo.vl_saldo += vl_movimento;
-
-                    gotoxy(19, 15);
-                    printf("R$ %.2f", resultOrigem->conteudo.vl_saldo);
-
-                    gotoxy(59, 15);
-                    printf("R$ %.2f", resultDestino->conteudo.vl_saldo);
-
-                    limpaMensagem();
-                    gotoxy(1, 22);
-                    printf("Data da Movimentacao (DD/MM/YYYY)");
-
-                    gotoxy(39, 18);
-                    fflush(stdin);
-                    fgets(dt_movimento, 11, stdin);
-                    
-                    limpaMensagem();
-                    gotoxy(1, 22);
-                    printf("Deseja Salvar? (1 - SIM / 2 - NAO): ");
-                    scanf("%d", &resp);
-
-                    if (resp == 1)
+                    if (vl_movimento != 0)
                     {
-                        o = (ApontMov) malloc(sizeof(TipoItemMov));
-                        d = (ApontMov) malloc(sizeof(TipoItemMov));
+                        resultOrigem->conteudo.vl_saldo -= vl_movimento;
+                        resultDestino->conteudo.vl_saldo += vl_movimento;
 
-                        o->conteudo.codigo_conta = movOrigem.codigo_conta;
-                        strcpy(o->conteudo.ds_favorecido, "Transferencia Entre Contas");
-                        strcpy(o->conteudo.dt_movimento, dt_movimento);
-                        strcpy(o->conteudo.tp_movimento, "Debito");
-                        o->conteudo.vl_movimento = vl_movimento;
-                        o->conteudo.vl_saldo = resultOrigem->conteudo.vl_saldo;
-        
-                        d->conteudo.codigo_conta = movDestino.codigo_conta;
-                        strcpy(d->conteudo.ds_favorecido, "Transferencia Entre Contas");
-                        strcpy(d->conteudo.dt_movimento, dt_movimento);
-                        strcpy(d->conteudo.tp_movimento, "Credito");
-                        d->conteudo.vl_movimento = vl_movimento;
-                        d->conteudo.vl_saldo = resultDestino->conteudo.vl_saldo;
+                        gotoxy(19, 15);
+                        printf("R$ %.2f", resultOrigem->conteudo.vl_saldo);
 
-                        if (S->pri == NULL)
+                        gotoxy(59, 15);
+                        printf("R$ %.2f", resultDestino->conteudo.vl_saldo);
+
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Data da Movimentacao (DD/MM/YYYY)");
+
+                        gotoxy(39, 18);
+                        fflush(stdin);
+                        fgets(dt_movimento, 11, stdin);
+                        
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Deseja Salvar? (1 - SIM / 2 - NAO): ");
+                        scanf("%d", &resp);
+
+                        if (resp == 1)
                         {
-                            S->pri = o;
-                            o->prox = d;
-                            S->ult = d;
-                            d->prox = NULL;
-                        }
-                        else
-                        {
-                            S->ult->prox = o;
-                            o->prox = d;
-                            S->ult = d;
-                            d->prox = NULL;
+                            o = (ApontMov) malloc(sizeof(TipoItemMov));
+                            d = (ApontMov) malloc(sizeof(TipoItemMov));
+
+                            o->conteudo.codigo_conta = movOrigem.codigo_conta;
+                            strcpy(o->conteudo.ds_favorecido, "Transferencia Entre Contas");
+                            strcpy(o->conteudo.dt_movimento, dt_movimento);
+                            strcpy(o->conteudo.tp_movimento, "Debito");
+                            o->conteudo.vl_movimento = vl_movimento;
+                            o->conteudo.vl_saldo = resultOrigem->conteudo.vl_saldo;
+            
+                            d->conteudo.codigo_conta = movDestino.codigo_conta;
+                            strcpy(d->conteudo.ds_favorecido, "Transferencia Entre Contas");
+                            strcpy(d->conteudo.dt_movimento, dt_movimento);
+                            strcpy(d->conteudo.tp_movimento, "Credito");
+                            d->conteudo.vl_movimento = vl_movimento;
+                            d->conteudo.vl_saldo = resultDestino->conteudo.vl_saldo;
+
+                            if (S->pri == NULL)
+                            {
+                                S->pri = o;
+                                o->prox = d;
+                                S->ult = d;
+                                d->prox = NULL;
+                            }
+                            else
+                            {
+                                S->ult->prox = o;
+                                o->prox = d;
+                                S->ult = d;
+                                d->prox = NULL;
+                            }
                         }
                     }
                 }
