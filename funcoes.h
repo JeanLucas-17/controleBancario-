@@ -127,10 +127,6 @@ void telaTransferencia();
 
 void transferenciaConta(ListaDupla *D, ListaSimples *S);
 
-void telaListaMov();
-
-void mostraMov(ListaSimples *S, int y, regMovimentacao mov);
-
 void telaDebitoeCredito();
 
 void moviDebitoeCredito(ListaSimples *S);
