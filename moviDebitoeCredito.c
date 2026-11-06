@@ -17,15 +17,27 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
     regConta conta;
     regMovimentacao movi;
     ApontMov p;
+
     float soma;
     int resp;
     soma = 0;
     do
     {
-
         system("cls");
         tela();
         telaDebitoeCredito();
+
+        if (S->pri == NULL)
+        {
+            gotoxy(37, 5);
+            printf("0");   
+        }
+        else
+        {
+            gotoxy(37, 5);
+            printf("%d", S->ult->conteudo.sequencial);
+        }
+
         limpaMensagem();
         gotoxy(1,22);
         printf("Digite 0 para sair.: ");
@@ -135,24 +147,25 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
 
                 if(resp == 1)
                 {
-
                     p = (ApontMov)malloc(sizeof(TipoItemMov));
                     movi.vl_saldo = result->conteudo.vl_saldo;
                     p->conteudo = movi;
                     p->prox = NULL;
                     result->conteudo.vl_saldo = conta.vl_saldo;
+
                     if(S->pri == NULL)
                     {
+                        p->conteudo.sequencial = 1;
                         S->pri = p;
                         S->ult = p;
                     }
                     else 
                     {
+                        p->conteudo.sequencial = S->ult->conteudo.sequencial + 1;
                         S->ult->prox = p;
                         S->ult = p;
                     }
                 }
-
             }
             else
             {
@@ -162,7 +175,7 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
                 getch();
             }
         }
-        else if(conta.codigo_conta < 0 )
+        else if(movi.codigo_conta < 0)
         {
             limpaMensagem();
             gotoxy(1, 22);

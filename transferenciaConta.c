@@ -192,6 +192,17 @@ void transferenciaConta(ListaDupla *D, ListaSimples *S)
                             o = (ApontMov) malloc(sizeof(TipoItemMov));
                             d = (ApontMov) malloc(sizeof(TipoItemMov));
 
+                            if (S->pri == NULL)
+                            {
+                                o->conteudo.sequencial = 1;
+                                d->conteudo.sequencial = 2;
+                            }
+                            else
+                            {
+                                o->conteudo.sequencial = S->ult->conteudo.sequencial + 1;
+                                d->conteudo.sequencial = o->conteudo.sequencial + 1;
+                            }
+
                             o->conteudo.codigo_conta = movOrigem.codigo_conta;
                             strcpy(o->conteudo.ds_favorecido, "Transferencia Entre Contas");
                             strcpy(o->conteudo.dt_movimento, dt_movimento);
