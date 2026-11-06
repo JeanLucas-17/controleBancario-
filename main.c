@@ -30,6 +30,7 @@ int main()
     lerDiscoConta(&D);
 
     lerDiscoMov(&S);
+
     do
     {
         system("cls");

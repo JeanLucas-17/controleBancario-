@@ -60,7 +60,7 @@ void consultaMov(ListaDupla *D, ListaSimples *S)
                     movi = i->conteudo;
                     if(conta.codigo_conta == movi.codigo_conta)
                     {
-                        
+
                         gotoxy(1, y);
                         printf(movi.dt_movimento);
 
