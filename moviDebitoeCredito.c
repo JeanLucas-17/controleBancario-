@@ -67,19 +67,21 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
                 
                 do
                 {
+                    gotoxy(37,16);
+                    printf("          ");
                     limpaMensagem();
                     gotoxy(1,22);
                     printf("Utilizar.. 1 - Debito 2 - Credito");
                     gotoxy(37, 16);
                     scanf("%d", &y);
-                    if(y < 1 && y > 2)
+                    if(y < 1 || y > 2)
                     {
                         limpaMensagem();
                         gotoxy(1,22);
                         printf("Opcao invalida.. Aperte ENTER");
                         getch();
                     }
-                }while(y < 1 && y > 2);
+                }while(y < 1 || y > 2);
                 if(y == 1)
                 {
                     strcpy(movi.tp_movimento, "Debito");
@@ -98,42 +100,47 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
                 fflush(stdin);
                 fgets(movi.ds_favorecido, 50, stdin);
 
-                do
+                if(y == 1)
+                {
+                    do
+                    {
+                        gotoxy(37,18);
+                        printf("              ");
+                        gotoxy(37, 18);
+                        scanf("%lf", &movi.vl_movimento);
+                        if(movi.vl_movimento > conta.vl_saldo + conta.vl_limite)
+                        {
+                            limpaMensagem();
+                            gotoxy(1, 22);
+                            printf("Saldo e Limite Insuficiente...");
+                        }
+                    }
+                    while(movi.vl_movimento > conta.vl_saldo + conta.vl_limite);
+                    conta.vl_saldo = conta.vl_saldo - movi.vl_movimento;
+                }
+                else
                 {
                     gotoxy(37, 18);
                     scanf("%lf", &movi.vl_movimento);
-                    if(movi.vl_movimento > conta.vl_saldo + conta.vl_limite)
-                    {
-                        limpaMensagem();
-                        gotoxy(1, 22);
-                        printf("Saldo e Limite Insuficiente...");
-                    }
+                    conta.vl_saldo = movi.vl_movimento + conta.vl_saldo;
                 }
-                while(movi.vl_movimento > conta.vl_saldo + conta.vl_limite);
 
+                gotoxy(37, 19);
+                printf("%.2f",conta.vl_saldo);
+                
                 limpaMensagem();
                 gotoxy(1,22);
-                printf("Deseja Salvar a movimentação.. 1 - Sim - 2 - Nao");
+                printf("Deseja Salvar a movimentacao.. 1 - Sim - 2 - Nao....:");
                 scanf("%d", &resp);
 
                 if(resp == 1)
                 {
-                    if(y == 1)
-                    {
-                        result->conteudo.vl_saldo = movi.vl_movimento - conta.vl_saldo;
-                    }
-                    else
-                    {
-                        result->conteudo.vl_saldo = movi.vl_movimento + conta.vl_saldo;
-                    }
-
-                    gotoxy(37, 19);
-                    printf("%lf",conta.vl_saldo);
 
                     p = (ApontMov)malloc(sizeof(TipoItemMov));
                     movi.vl_saldo = result->conteudo.vl_saldo;
                     p->conteudo = movi;
                     p->prox = NULL;
+                    result->conteudo.vl_saldo = conta.vl_saldo;
                     if(S->pri == NULL)
                     {
                         S->pri = p;
@@ -163,5 +170,5 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
             getch();
         }
         
-    }while (conta.codigo_conta != 0);
+    }while (movi.codigo_conta != 0);
 }

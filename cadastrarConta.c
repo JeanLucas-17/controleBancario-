@@ -39,7 +39,7 @@ void cadastrarConta(ListaDupla *D, int opcao)
         gotoxy(41, 4);
         scanf("%d", &conta.codigo_conta);
 
-        if (conta.codigo_conta != 0 && conta.codigo_conta > 0)
+        if (conta.codigo_conta > 0)
         {
             limpaMensagem();
 

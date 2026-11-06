@@ -98,7 +98,7 @@ void consultaConta(ListaDupla *D, int opcao)
                 gotoxy(41, 4);
                 scanf("%d", &codigo);
 
-                if (codigo != 0 && codigo > 0)
+                if (codigo > 0)
                 {
                     result = pesquisaCodigoConta(D, codigo);
 

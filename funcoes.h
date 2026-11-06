@@ -50,7 +50,7 @@ typedef struct
     int sequencial;
     int codigo_conta;
     char dt_movimento[11];
-    char tp_movimento[15];
+    char tp_movimento[30];
     char ds_favorecido[50];
     double vl_movimento;
     double vl_saldo;
@@ -127,5 +127,14 @@ void telaDebitoeCredito();
 
 void moviDebitoeCredito(ListaSimples *S, ListaDupla *D);
 
+void transferenciaConta(ListaDupla *D, ListaSimples *S);
+
+void telaDebitoeCredito();
+
+void lerDiscoMov(ListaSimples *S);
+
+void salvarDiscoMov(ListaSimples *S);
+
+void telaTransferencia();
 
 #endif

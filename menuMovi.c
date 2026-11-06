@@ -26,13 +26,26 @@ void menuMovi(ListaSimples *S, ListaDupla *D)
 
         switch (opcao)
         {
-            case 1:
-                
+            case 1:     
                 moviDebitoeCredito(S,D);
+
                 break;
         
+            case 2:
+                transferenciaConta(D, S);
+
+                break;
+
+            case 3:
+
+                break;
+
+            case 4:
+            
+                break;
             default:
                 erro();
+                
                 break;
         }
     }while (opcao != 4);

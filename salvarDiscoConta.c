@@ -55,6 +55,6 @@ void salvarDiscoConta(ListaDupla *D)
 
     limpaMensagem();
     gotoxy(1, 22);
-    printf("Dados salvos no arquivo! Aperte ENTER: ");
+    printf("Dados das contas salvos no arquivo! Aperte ENTER: ");
     getch();
 }
