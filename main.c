@@ -28,7 +28,8 @@ int main()
     system("color 0a");
     
     lerDiscoConta(&D);
-    
+    lerDiscoMov(&S);
+
     do
     {
         system("cls");
@@ -53,6 +54,7 @@ int main()
 
             case 3:
                 salvarDiscoConta(&D);
+                salvarDiscoMov(&S);
 
                 break;
 

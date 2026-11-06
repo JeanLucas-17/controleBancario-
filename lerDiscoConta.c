@@ -73,6 +73,6 @@ void lerDiscoConta(ListaDupla *D)
 
     limpaMensagem();
     gotoxy(1, 22);
-    printf("Dados lidos do arquivo! Aperte ENTER: ");
+    printf("Dados das contas lidos do arquivo! Aperte ENTER: ");
     getch();
 }

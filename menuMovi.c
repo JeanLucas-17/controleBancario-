@@ -36,6 +36,13 @@ void menuMovi(ListaDupla *D, ListaSimples *S)
 
                 break;
 
+            case 3:
+
+                break;
+
+            case 4:
+            
+                break;
             default:
                 erro();
                 

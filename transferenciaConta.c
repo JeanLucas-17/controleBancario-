@@ -10,20 +10,23 @@
 
 #include "funcoes.h"
 
-void transferenciaConta(ListaDupla*D, ListaSimples *S)
+void transferenciaConta(ListaDupla *D, ListaSimples *S)
 {
     ApontConta resultDestino;
     ApontConta resultOrigem;
-    regConta contaDestino;
+
     regConta contaOrigem;
+    regConta contaDestino;
+        
+    regMovimentacao movOrigem;
+    regMovimentacao movDestino;
+    ApontMov o;
+    ApontMov d;
 
-    regMovimentacao mov;
-    ApontMov p;
+    double vl_movimento;
+    char dt_movimento[11];
 
-    double novoSaldoOr;
-    double novoSaldoDe;
-
-    int codigo;
+    int resp;
 
     do
     {
@@ -37,13 +40,11 @@ void transferenciaConta(ListaDupla*D, ListaSimples *S)
         printf("OBS (0 para sair): ");
 
         gotoxy(19, 7);
-        scanf("%d", &contaOrigem.codigo_conta);
+        scanf("%d", &movOrigem.codigo_conta);
 
-        if (contaOrigem.codigo_conta != 0 && contaOrigem.codigo_conta > 0)
+        if (movOrigem.codigo_conta > 0)
         {
-            limpaMensagem();
-
-            resultOrigem = pesquisaCodigoConta(D, contaOrigem.codigo_conta);
+            resultOrigem = pesquisaCodigoConta(D, movOrigem.codigo_conta);
 
             if (resultOrigem != NULL)
             {
@@ -75,108 +76,144 @@ void transferenciaConta(ListaDupla*D, ListaSimples *S)
                     gotoxy(59, 7);
                     printf("                    ");
 
+                    limpaMensagem();
+                    gotoxy(1, 22);
+                    printf("OBS (0 para sair): ");
+
                     gotoxy(59, 7);
-                    scanf("%d", &contaDestino.codigo_conta);
+                    scanf("%d", &movDestino.codigo_conta);
 
-                    resultDestino = pesquisaCodigoConta(D, contaDestino.codigo_conta);
+                   if (movDestino.codigo_conta > 0)
+                   {
+                        limpaMensagem();
 
-                    if (resultDestino == NULL)
-                    {
+                        resultDestino = pesquisaCodigoConta(D, movDestino.codigo_conta);
+
+                        if (resultDestino == NULL)
+                        {
+                            limpaMensagem();
+                            gotoxy(1, 22);
+                            printf("Codigo nao Cadastrado! Aperte ENTER: ");
+                            getch();
+                        }
+                        else if (movOrigem.codigo_conta == movDestino.codigo_conta)
+                        {
+                            limpaMensagem();
+                            gotoxy(1, 22);
+                            printf("Codigo sao iguais! Aperter ENTER: ");
+                            getch();
+                        }
+                   }
+                   else if (movDestino.codigo_conta < 0)
+                   {
                         limpaMensagem();
                         gotoxy(1, 22);
-                        printf("Codigo nao Cadastrado! Aperte ENTER: ");
+                        printf("Codigo Invalido! Aperte ENTER: ");
                         getch();
-                    }
-                    else if (contaOrigem.codigo_conta == contaDestino.codigo_conta)
+                   }
+
+                } while ((resultDestino == NULL || movOrigem.codigo_conta == movDestino.codigo_conta) && movDestino.codigo_conta != 0);
+
+                if (movDestino.codigo_conta != 0)
+                {
+                    contaDestino = resultDestino->conteudo;
+
+                    gotoxy(59, 8);
+                    printf(contaDestino.banco);
+
+                    gotoxy(59, 9);
+                    printf(contaDestino.agencia);
+
+                    gotoxy(59, 10);
+                    printf(contaDestino.numero_conta);
+
+                    gotoxy(59, 11);
+                    printf(contaDestino.tipo_conta);
+
+                    gotoxy(59, 12);
+                    printf("R$ %.2f", contaDestino.vl_saldo);
+
+                    gotoxy(59, 13);
+                    printf("R$ %.2f", contaDestino.vl_limite);
+
+                    gotoxy(59, 14);
+                    printf("R$ %.2f", contaDestino.vl_saldo + contaDestino.vl_limite);
+
+                    do
                     {
+                        gotoxy(39, 17);
+                        printf("                                     ");
+                        gotoxy(39, 17);
+                        scanf("%lf", &vl_movimento);
+
+                        if (vl_movimento > (contaOrigem.vl_saldo + contaOrigem.vl_limite) || vl_movimento < 1)
+                        {
+                            limpaMensagem();
+                            gotoxy(1, 22);
+                            printf("Valor Invalido ou Saldo Insuficiente! Aperte ENTER: ");
+                            getch();
+                        }
+
                         limpaMensagem();
-                        gotoxy(1, 22);
-                        printf("Codigo sao iguais! Aperter ENTER: ");
-                        getch();
-                    }
+
+                    } while (vl_movimento > (contaOrigem.vl_saldo + contaOrigem.vl_limite) || vl_movimento < 1);
+
+                    resultOrigem->conteudo.vl_saldo -= vl_movimento;
+                    resultDestino->conteudo.vl_saldo += vl_movimento;
+
+                    gotoxy(19, 15);
+                    printf("R$ %.2f", resultOrigem->conteudo.vl_saldo);
+
+                    gotoxy(59, 15);
+                    printf("R$ %.2f", resultDestino->conteudo.vl_saldo);
 
                     limpaMensagem();
+                    gotoxy(1, 22);
+                    printf("Data da Movimentacao (DD/MM/YYYY)");
 
-                } while (resultDestino == NULL || contaOrigem.codigo_conta == contaDestino.codigo_conta);
-
-                contaDestino = resultDestino->conteudo;
-
-                gotoxy(59, 8);
-                printf(contaDestino.banco);
-
-                gotoxy(59, 9);
-                printf(contaDestino.agencia);
-
-                gotoxy(59, 10);
-                printf(contaDestino.numero_conta);
-
-                gotoxy(59, 11);
-                printf(contaDestino.tipo_conta);
-
-                gotoxy(59, 12);
-                printf("R$ %.2f", contaDestino.vl_saldo);
-
-                gotoxy(59, 13);
-                printf("R$ %.2f", contaDestino.vl_limite);
-
-                gotoxy(59, 14);
-                printf("R$ %.2f", contaDestino.vl_saldo + contaDestino.vl_limite);
-
-                do
-                {
-                    gotoxy(39, 17);
-                    printf("                                     ");
-                    gotoxy(39, 17);
-                    scanf("%lf", &mov.vl_movimento);
-
-                    if (mov.vl_movimento > (contaOrigem.vl_saldo + contaOrigem.vl_limite) || mov.vl_movimento < 1)
-                    {
-                        limpaMensagem();
-                        gotoxy(1, 22);
-                        printf("Valor Invalido ou Saldo Insuficiente! Aperte ENTER: ");
-                        getch();
-                    }
-
+                    gotoxy(39, 18);
+                    fflush(stdin);
+                    fgets(dt_movimento, 11, stdin);
+                    
                     limpaMensagem();
+                    gotoxy(1, 22);
+                    printf("Deseja Salvar? (1 - SIM / 2 - NAO): ");
+                    scanf("%d", &resp);
 
-                } while (mov.vl_movimento > (contaOrigem.vl_saldo + contaOrigem.vl_limite) || mov.vl_movimento < 1);
+                    if (resp == 1)
+                    {
+                        o = (ApontMov) malloc(sizeof(TipoItemMov));
+                        d = (ApontMov) malloc(sizeof(TipoItemMov));
 
-                novoSaldoOr = contaOrigem.vl_saldo - mov.vl_movimento;
-                novoSaldoDe = contaDestino.vl_saldo + mov.vl_movimento;
+                        o->conteudo.codigo_conta = movOrigem.codigo_conta;
+                        strcpy(o->conteudo.ds_favorecido, "Transferencia Entre Contas");
+                        strcpy(o->conteudo.dt_movimento, dt_movimento);
+                        strcpy(o->conteudo.tp_movimento, "Debito");
+                        o->conteudo.vl_movimento = vl_movimento;
+                        o->conteudo.vl_saldo = resultOrigem->conteudo.vl_saldo;
+        
+                        d->conteudo.codigo_conta = movDestino.codigo_conta;
+                        strcpy(d->conteudo.ds_favorecido, "Transferencia Entre Contas");
+                        strcpy(d->conteudo.dt_movimento, dt_movimento);
+                        strcpy(d->conteudo.tp_movimento, "Credito");
+                        d->conteudo.vl_movimento = vl_movimento;
+                        d->conteudo.vl_saldo = resultDestino->conteudo.vl_saldo;
 
-                resultOrigem->conteudo.vl_saldo = novoSaldoOr;
-                resultDestino->conteudo.vl_saldo = novoSaldoDe;
-
-                gotoxy(19, 15);
-                printf("R$ %.2f", novoSaldoOr);
-
-                gotoxy(59, 15);
-                printf("R$ %.2f", novoSaldoDe);
-
-                gotoxy(39, 18);
-                scanf("%s", &mov.dt_movimento);
-                
-                mov.sequencial++;
-                strcpy(mov.tp_movimento, "Transferencia Entre Contas");
-                mov.codigo_conta = contaOrigem.codigo_conta;
-                strcpy(mov.ds_favorecido, contaDestino.banco);
-                mov.vl_saldo = contaOrigem.vl_saldo;
-
-                p = (ApontMov) malloc(sizeof(TipoItemMov));
-
-                p->conteudo = mov;
-
-                if (S->pri == NULL)
-                {
-                    S->pri = p;
-                    S->ult = p;
-                    p->prox = NULL;
-                }
-                else
-                {
-                    S->ult->prox = p;
-                    S->ult = p;
-                    p->prox = NULL;
+                        if (S->pri == NULL)
+                        {
+                            S->pri = o;
+                            o->prox = d;
+                            S->ult = d;
+                            d->prox = NULL;
+                        }
+                        else
+                        {
+                            S->ult->prox = o;
+                            o->prox = d;
+                            S->ult = d;
+                            d->prox = NULL;
+                        }
+                    }
                 }
             }
             else
@@ -187,12 +224,12 @@ void transferenciaConta(ListaDupla*D, ListaSimples *S)
                 getch();
             }
         }
-        else if (contaOrigem.codigo_conta < 0)
+        else if (movOrigem.codigo_conta < 0)
         {
             limpaMensagem();
             gotoxy(1, 22);
             printf("Codigo Invalido! Aperte ENTER: ");
             getch();
         }
-    } while (contaOrigem.codigo_conta != 0);
+    } while (movOrigem.codigo_conta != 0 && movDestino.codigo_conta != 0);
 }

@@ -59,10 +59,10 @@ void mostraConta(regConta conta, int opcao, int y)
         printf(conta.tipo_conta);
 
         gotoxy(54, y);
-        printf("R$  %.2f", conta.vl_saldo);
+        printf("R$ %.2f", conta.vl_saldo);
 
         gotoxy(66, y);
-        printf("R$  %.2f", conta.vl_limite);
+        printf("R$ %.2f", conta.vl_limite);
 
         gotoxy(78, y);
         printf("%d", conta.status);
