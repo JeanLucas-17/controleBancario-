@@ -37,7 +37,7 @@ void transferenciaConta(ListaDupla *D, ListaSimples *S)
         limpaMensagem();
 
         gotoxy(1, 22);
-        printf("OBS (0 para sair): ");
+        printf("Digite 0 para sair: ");
 
         gotoxy(19, 7);
         scanf("%d", &movOrigem.codigo_conta);
@@ -250,5 +250,5 @@ void transferenciaConta(ListaDupla *D, ListaSimples *S)
             printf("Codigo Invalido! Aperte ENTER: ");
             getch();
         }
-    } while (movOrigem.codigo_conta != 0 && movDestino.codigo_conta != 0);
+    } while ((movOrigem.codigo_conta != 0 && movDestino.codigo_conta != 0) && vl_movimento != 0);
 }
