@@ -37,7 +37,7 @@ void menuMovi(ListaSimples *S, ListaDupla *D)
                 break;
 
             case 3:
-
+                consultaMov(D,S);
                 break;
 
             case 4:

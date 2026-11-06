@@ -137,4 +137,7 @@ void salvarDiscoMov(ListaSimples *S);
 
 void telaTransferencia();
 
+void consultaMov(ListaDupla *D, ListaSimples *S);
+
+void telaConsultaMovi();
 #endif
