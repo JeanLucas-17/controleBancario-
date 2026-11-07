@@ -44,7 +44,7 @@ int main()
         switch (opcao)
         {
             case 1:
-                menuConta(&D);
+                menuConta(&D,&S);
 
                 break;
 

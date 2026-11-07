@@ -79,7 +79,7 @@ void tela();
 
 void telaPrincipal();
 
-void menuConta(ListaDupla *D);
+void menuConta(ListaDupla *D, ListaSimples *S);
 
 void cadastrarConta(ListaDupla *D, int opcao);
 
@@ -115,7 +115,7 @@ void erro();
 
 void alterarConta(ListaDupla *D);
 
-void removerConta(ListaDupla *D, int opcao);
+void removerConta(ListaDupla *D, int opcao, ListaSimples *S);
 
 void rodapeConta(double saldoTot, double limiteTot, int y);
 
@@ -140,4 +140,6 @@ void telaTransferencia();
 void consultaMov(ListaDupla *D, ListaSimples *S);
 
 void telaConsultaMovi();
+
+ApontMov pesquisaCodigoMovi(int codigo, ListaSimples *S);
 #endif

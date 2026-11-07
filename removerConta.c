@@ -9,7 +9,7 @@
 */ 
 #include "funcoes.h"
 
-void removerConta(ListaDupla *D, int opcao)
+void removerConta(ListaDupla *D, int opcao, ListaSimples *S)
 {
     int pos;
     int x;
@@ -17,6 +17,7 @@ void removerConta(ListaDupla *D, int opcao)
 
     ApontConta result;
     regConta conta;
+    ApontMov resultado;
 
     if(D->pri != NULL)
     {
@@ -86,61 +87,72 @@ void removerConta(ListaDupla *D, int opcao)
             gotoxy(1,22);
             printf("Deseja remover.... 1 - Sim | 2 - Nao: ");
             scanf("%d", &resp);
-            if(resp == 1)
+            resultado = pesquisaCodigoMovi(conta.codigo_conta, S);
+            if(resultado == NULL)
             {
-                if(D->pri == NULL)
+                if(resp == 1)
                 {
-                    limpaMensagem();
-                    gotoxy(1,22);
-                    printf("Sem contas cadastradas..... Pressione ENTER: ");
-                    getch();
-                }
-                else
-                {
-                    if(D->pri == D->ult)
+                    if(D->pri == NULL)
                     {
-                        free(D->pri);
-                        D->pri == NULL;
-                        D->pri == NULL;
+                        limpaMensagem();
+                        gotoxy(1,22);
+                        printf("Sem contas cadastradas..... Pressione ENTER: ");
+                        getch();
                     }
                     else
                     {
-                        if(opcao == 4)
+                        if(D->pri == D->ult)
                         {
-                            D->ult = D->ult->ant;
-                            free(D->ult->prox);
-                            D->ult->prox = NULL;
-                        }
-                        else if (opcao ==5)
-                        {
-                            D->pri = D->pri->prox;
-                            free(D->pri->ant);
-                            D->pri->ant = NULL;
+                            free(D->pri);
+                            D->pri == NULL;
+                            D->pri == NULL;
                         }
                         else
                         {
-                            if(pos == 1)
-                            {
-                                D->pri = D->pri->prox;
-                                free(D->pri->ant);
-                                D->pri->ant = NULL;
-                            }
-                            else if(pos == x)
+                            if(opcao == 4)
                             {
                                 D->ult = D->ult->ant;
                                 free(D->ult->prox);
                                 D->ult->prox = NULL;
                             }
+                            else if (opcao ==5)
+                            {
+                                D->pri = D->pri->prox;
+                                free(D->pri->ant);
+                                D->pri->ant = NULL;
+                            }
                             else
                             {
-                                result->prox->ant = result->ant;
-                                result->ant->prox = result->prox;
-                                free(result);
+                                if(pos == 1)
+                                {
+                                    D->pri = D->pri->prox;
+                                    free(D->pri->ant);
+                                    D->pri->ant = NULL;
+                                }
+                                else if(pos == x)
+                                {
+                                    D->ult = D->ult->ant;
+                                    free(D->ult->prox);
+                                    D->ult->prox = NULL;
+                                }
+                                else
+                                {
+                                    result->prox->ant = result->ant;
+                                    result->ant->prox = result->prox;
+                                    free(result);
+                                }
+                                
                             }
-                            
                         }
                     }
                 }
+            }
+            else
+            {
+                limpaMensagem();
+                gotoxy(1,22);
+                printf("Conta com movimentacao, nao pode ser removida - aperte ENTER");
+                getch();
             }
 
             limpaMensagem();

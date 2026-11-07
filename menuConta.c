@@ -10,7 +10,7 @@
 
 #include "funcoes.h"
 
-void menuConta(ListaDupla *D)
+void menuConta(ListaDupla *D, ListaSimples *S)
 {
     int opcao;
 
@@ -43,17 +43,17 @@ void menuConta(ListaDupla *D)
 
                 break;
             case 4:
-                removerConta(D, opcao);
+                removerConta(D, opcao, S);
 
                 break;
 
             case 5:
-                removerConta(D, opcao);
+                removerConta(D, opcao, S);
 
                 break;
 
             case 6:
-                removerConta(D, opcao);
+                removerConta(D, opcao, S);
 
                 break;
                 
