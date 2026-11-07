@@ -148,11 +148,11 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
                 if(resp == 1)
                 {
                     p = (ApontMov)malloc(sizeof(TipoItemMov));
+                    result->conteudo.vl_saldo = conta.vl_saldo;
                     movi.vl_saldo = result->conteudo.vl_saldo;
                     p->conteudo = movi;
                     p->prox = NULL;
-                    result->conteudo.vl_saldo = conta.vl_saldo;
-
+                    
                     if(S->pri == NULL)
                     {
                         p->conteudo.sequencial = 1;

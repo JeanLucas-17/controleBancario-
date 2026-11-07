@@ -57,6 +57,31 @@ void consultaMov(ListaDupla *D, ListaSimples *S)
 
                 while (i != NULL)
                 {
+                    if(y == 21)
+                    {
+                        gotoxy(1,22);
+                        printf("Aperte ENTER para avancar....");
+                        getch();
+                        system("cls");
+                        tela();
+                        telaConsultaMovi();
+                        y = 8;
+
+                        gotoxy(11, 4);
+                        printf("-");
+
+                        gotoxy(13, 4);
+                        printf(conta.banco);
+
+                        gotoxy(30, 4);
+                        printf("Agencia: %s", conta.agencia);
+
+                        gotoxy(45,4);
+                        printf("Cta: %s", conta.numero_conta);
+
+                        gotoxy(60,4);
+                        printf("Tp: %s", conta.tipo_conta);
+                    }
                     movi = i->conteudo;
                     if(conta.codigo_conta == movi.codigo_conta)
                     {
@@ -75,9 +100,13 @@ void consultaMov(ListaDupla *D, ListaSimples *S)
 
                         gotoxy(68, y);
                         printf("R$ %.2f", movi.vl_saldo);
+                        y++;
                     }
+                    i = i->prox;
                 }
-                
+                gotoxy(1,22);
+                printf("Aperte ENTER......");
+                getch();
             }
             else
             {
