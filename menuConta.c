@@ -20,6 +20,9 @@ void menuConta(ListaDupla *D, ListaSimples *S)
         tela();
         telaConta();
 
+        gotoxy(30, 2);
+        printf("MENU CONTA");
+
         limpaMensagem();
 
         gotoxy(1, 22);

@@ -34,7 +34,7 @@ void lerDiscoConta(ListaDupla *D)
     system("cls");
     tela();
 
-    gotoxy(24, 2);
+    gotoxy(28, 2);
     printf("LER CONTAS DO DISCO");
 
     while (fread(&conta, sizeof(regConta), 1, arq) == 1)

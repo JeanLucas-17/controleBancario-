@@ -26,6 +26,9 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
         system("cls");
         tela();
         telaDebitoeCredito();
+        
+        gotoxy(18, 2);
+        printf("MENU MOVIMENTACAO DEBITO E CREDITO");
 
         if (S->pri == NULL)
         {

@@ -24,6 +24,12 @@ void salvarDiscoConta(ListaDupla *D)
     modoGravacao = "wb";
     nomeArquvio = "contas.dat";
 
+    system("cls");
+    tela();
+
+    gotoxy(24, 2);
+    printf("SALVAR CONTAS NO DISCO");
+
     arq = fopen(nomeArquvio, modoGravacao);
 
     if (arq == NULL)
@@ -37,12 +43,6 @@ void salvarDiscoConta(ListaDupla *D)
     }
 
     i = D->pri;
-
-    system("cls");
-    tela();
-
-    gotoxy(24, 2);
-    printf("SALVAR CONTAS NO DISCO");
 
     while (i != NULL)
     {

@@ -24,8 +24,13 @@ void consultaMov(ListaDupla *D, ListaSimples *S)
         tela();
         telaConsultaMovi();
         limpaMensagem();
+        
+        gotoxy(26, 2);
+        printf("CONSULTA MOVIMENTACAO");
+
         gotoxy(1,22);
         printf("Digite 0 para sair....");
+
         gotoxy(9, 4);
         scanf("%d", &conta.codigo_conta);
 
@@ -65,6 +70,10 @@ void consultaMov(ListaDupla *D, ListaSimples *S)
                         system("cls");
                         tela();
                         telaConsultaMovi();
+                                        
+                        gotoxy(26, 2);
+                        printf("CONSULTA MOVIMENTACAO");
+                        
                         y = 8;
 
                         gotoxy(11, 4);

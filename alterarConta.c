@@ -23,6 +23,9 @@ void alterarConta(ListaDupla *D)
         system("cls");
         tela();
         telaCadastrar();
+        
+        gotoxy(30, 2);
+        printf("ALTERAR CONTAS");
 
         limpaMensagem();
 

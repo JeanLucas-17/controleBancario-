@@ -34,7 +34,7 @@ void lerDiscoMov(ListaSimples *S)
     system("cls");
     tela();
 
-    gotoxy(18, 2);
+    gotoxy(28, 2);
     printf("LER MOVIMENTACAO DO DISCO");
 
     while (fread(&mov, sizeof(regMovimentacao), 1, arq) == 1)

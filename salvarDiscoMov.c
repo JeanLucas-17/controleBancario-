@@ -23,6 +23,12 @@ void salvarDiscoMov(ListaSimples *S)
 
     modoGravacao = "wb";
     nomeArquvio = "movimentacoes.dat";
+    
+    system("cls");
+    tela();
+
+    gotoxy(18, 2);
+    printf("SALVAR MOVIMENTACOES NO DISCO");
 
     arq = fopen(nomeArquvio, modoGravacao);
 
@@ -37,12 +43,6 @@ void salvarDiscoMov(ListaSimples *S)
     }
 
     i = S->pri;
-
-    system("cls");
-    tela();
-
-    gotoxy(18, 2);
-    printf("SALVAR MOVIMENTACOES NO DISCO");
 
     while (i != NULL)
     {

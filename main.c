@@ -37,6 +37,9 @@ int main()
         tela();
         telaPrincipal();
 
+        gotoxy(30, 2);
+        printf("MENU PRINCIPAL");
+
         gotoxy(1, 22);
         printf("Opcao: ");
         scanf("%d", &opcao);

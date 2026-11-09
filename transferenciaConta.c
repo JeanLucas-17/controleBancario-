@@ -33,6 +33,9 @@ void transferenciaConta(ListaDupla *D, ListaSimples *S)
         system("cls");
         tela();
         telaTransferencia();
+            
+        gotoxy(24, 2);
+        printf("TRANSFERENCIA ENTRE CONTAS");
 
         limpaMensagem();
 

@@ -20,6 +20,9 @@ void menuConsultaConta(ListaDupla *D)
         tela();
         telaConsulta();
         
+        gotoxy(26, 2);
+        printf("MENU CONSULTA CONTA");
+        
         limpaMensagem();
         gotoxy(1, 22);
         printf("Opcao: ");

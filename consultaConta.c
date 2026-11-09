@@ -52,6 +52,9 @@ void consultaConta(ListaDupla *D, int opcao)
                     tela();
                     telaCadastrar();
 
+                    gotoxy(22, 2);
+                    printf("CONSULTA GERAL DE CONTAS");
+
                     conta = i->conteudo;
 
                     mostraConta(conta, opcao, 0);
@@ -90,6 +93,9 @@ void consultaConta(ListaDupla *D, int opcao)
 
                 tela();
                 telaCadastrar();
+        
+                gotoxy(20, 2);
+                printf("CONSULTA POR CODIGO DE CONTAS");
 
                 limpaMensagem();
                 gotoxy(1, 22);
@@ -142,21 +148,27 @@ void consultaConta(ListaDupla *D, int opcao)
         }
         else
         {
-            if (opcao == 3)
-            {
-                ordemCodigo(D);
-            }
-            else
-            {
-                ordemAlfabetica(D);
-            }
-
             saldoTot = 0;
             limiteTot = 0;
 
             system("cls");
             tela();
             cabecalhoContas();
+
+            if (opcao == 3)
+            {
+                gotoxy(20, 2);
+                printf("CONSULTA POR ORDEM DE CODIGO");
+
+                ordemCodigo(D);
+            }
+            else
+            {
+                gotoxy(20, 2);
+                printf("CONSULTA POR ORDEM ALFABETICA");
+
+                ordemAlfabetica(D);
+            }
 
             i = D->pri;
 
@@ -186,6 +198,17 @@ void consultaConta(ListaDupla *D, int opcao)
                         mostraConta(conta, opcao, y);
 
                         cabecalhoContas();
+
+                        if (opcao == 3)
+                        {
+                            gotoxy(20, 2);
+                            printf("CONSULTA POR ORDEM DE CODIGO");
+                        }
+                        else
+                        {
+                            gotoxy(20, 2);
+                            printf("CONSULTA POR ORDEM ALFABETICA");
+                        }
                     }
                     else
                     {
@@ -217,6 +240,17 @@ void consultaConta(ListaDupla *D, int opcao)
             {
                 cabecalhoContas();
                 rodapeConta(saldoTot, limiteTot, y);
+            }
+
+            if (opcao == 3)
+            {
+                gotoxy(20, 2);
+                printf("CONSULTA POR ORDEM DE CODIGO");
+            }
+            else
+            {
+                gotoxy(20, 2);
+                printf("CONSULTA POR ORDEM ALFABETICA");
             }
 
             limpaMensagem();

@@ -15,7 +15,6 @@ void cadastrarConta(ListaDupla *D, int opcao)
     ApontConta result;
     ApontConta posicao;
     ApontConta p;
-    ApontConta i;
 
     regConta conta;
 
@@ -23,13 +22,28 @@ void cadastrarConta(ListaDupla *D, int opcao)
     int resp;
     int pos;
     int x;
-    int c;
 
     do
     {
         system("cls");
         tela();
         telaCadastrar();
+
+        if (opcao == 1)
+        {    
+            gotoxy(22, 2);
+            printf("CADASTRAR CONTAS NO FINAL");
+        }
+        else if (opcao == 2)
+        {
+            gotoxy(22, 2);
+            printf("CADASTRAR CONTAS NO INICIO");
+        }
+        else
+        {
+            gotoxy(22, 2);
+            printf("CADASTRAR CONTAS NA POSICAO");
+        }
 
         limpaMensagem();
 

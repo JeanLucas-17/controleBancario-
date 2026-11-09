@@ -28,15 +28,24 @@ void removerConta(ListaDupla *D, int opcao, ListaSimples *S)
             telaCadastrar();
 
             if(opcao == 4)
-            {
+            {        
+                gotoxy(22, 2);
+                printf("REMOVER CONTAS NO FINAL");
+
                 conta = D->ult->conteudo;
             }
             else if(opcao == 5)
             {
+                gotoxy(22, 2);
+                printf("REMOVER CONTAS NO INICIO");
+
                 conta = D->pri->conteudo;
             }
             else
             {
+                gotoxy(22, 2);
+                printf("REMOVER CONTAS NA POSICAO");
+
                 do
                 {
                     limpaMensagem();
@@ -87,10 +96,12 @@ void removerConta(ListaDupla *D, int opcao, ListaSimples *S)
             gotoxy(1,22);
             printf("Deseja remover.... 1 - Sim | 2 - Nao: ");
             scanf("%d", &resp);
-            resultado = pesquisaCodigoMovi(conta.codigo_conta, S);
-            if(resultado == NULL)
+
+            if(resp == 1)
             {
-                if(resp == 1)
+                resultado = pesquisaCodigoMovi(conta.codigo_conta, S);
+            
+                if(resultado == NULL)
                 {
                     if(D->pri == NULL)
                     {
@@ -146,13 +157,13 @@ void removerConta(ListaDupla *D, int opcao, ListaSimples *S)
                         }
                     }
                 }
-            }
-            else
-            {
-                limpaMensagem();
-                gotoxy(1,22);
-                printf("Conta com movimentacao, nao pode ser removida - aperte ENTER");
-                getch();
+                else
+                {
+                    limpaMensagem();
+                    gotoxy(1,22);
+                    printf("Conta com movimentacao, nao pode ser removida - aperte ENTER");
+                    getch();
+                }
             }
 
             limpaMensagem();

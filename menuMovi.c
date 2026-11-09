@@ -18,6 +18,10 @@ void menuMovi(ListaSimples *S, ListaDupla *D)
         system("cls");
         tela();        
         telaMovi();
+
+        gotoxy(26, 2);
+        printf("MENU MOVIMENTACAO");
+
         limpaMensagem();
 
         gotoxy(1,22);
