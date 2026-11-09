@@ -28,6 +28,10 @@ void transferenciaConta(ListaDupla *D, ListaSimples *S)
 
     int resp;
 
+    int dia;
+    int mes;
+    int ano;
+
     do
     {
         system("cls");
@@ -177,14 +181,13 @@ void transferenciaConta(ListaDupla *D, ListaSimples *S)
                         gotoxy(59, 15);
                         printf("R$ %.2f", resultDestino->conteudo.vl_saldo);
 
-                        limpaMensagem();
-                        gotoxy(1, 22);
-                        printf("Data da Movimentacao (DD/MM/YYYY)");
+                        pegarDataAtual(&dia, &mes, &ano);
 
-                        gotoxy(39, 18);
-                        fflush(stdin);
-                        fgets(dt_movimento, 11, stdin);
+                        sprintf(dt_movimento, "%02d/%02d/%04d", dia, mes, ano);
                         
+                        gotoxy(39, 18);
+                        printf("%s", dt_movimento);
+
                         limpaMensagem();
                         gotoxy(1, 22);
                         printf("Deseja Salvar? (1 - SIM / 2 - NAO): ");

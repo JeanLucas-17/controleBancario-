@@ -18,9 +18,12 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
     regMovimentacao movi;
     ApontMov p;
 
-    float soma;
     int resp;
-    soma = 0;
+
+    int dia;
+    int mes;
+    int ano;
+
     do
     {
         system("cls");
@@ -75,11 +78,14 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
 
                 gotoxy(37, 13);
                 printf("%.2f", conta.vl_saldo + conta.vl_limite);
+               
+                pegarDataAtual(&dia, &mes, &ano);
                 
+                sprintf(movi.dt_movimento, "%02d/%02d/%04d", dia, mes, ano);
+
                 gotoxy(37, 15);
-                fflush(stdin);
-                fgets(movi.dt_movimento, 11, stdin);
-                
+                printf("%s", movi.dt_movimento);
+
                 do
                 {
                     gotoxy(37,16);
@@ -109,7 +115,7 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
                     gotoxy(39,16);
                     printf("- Credito");
                 }
-                
+
                 do
                 {
                     limpaMensagem();

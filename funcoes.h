@@ -17,6 +17,7 @@
 #include <windows.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 
 typedef struct
 {
@@ -144,5 +145,7 @@ void telaConsultaMovi();
 ApontMov pesquisaCodigoMovi(int codigo, ListaSimples *S);
 
 void freeMalloc(ListaDupla *D, ListaSimples *S);
+
+void pegarDataAtual(int *dia, int *mes, int *ano);
 
 #endif
