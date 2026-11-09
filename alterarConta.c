@@ -17,6 +17,7 @@ void alterarConta(ListaDupla *D)
 
     int codigo;
     int resp;
+    int tipo;
 
     do
     {
@@ -89,9 +90,25 @@ void alterarConta(ListaDupla *D)
                                 gotoxy(41, 6);
                                 printf("                                     ");
 
-                                gotoxy(41, 6);
-                                fflush(stdin);
-                                fgets(conta.banco, 50, stdin);
+                                do
+                                {
+                                    limpaMensagem();
+                                    gotoxy(41, 6);
+                                    fflush(stdin);
+                                    
+                                    if( fgets(conta.banco, 50, stdin) != NULL)
+                                    {
+                                        conta.banco[strcspn(conta.banco, "\n")] = '\0';
+                                    }
+
+                                    if (conta.banco[0] == '\0')
+                                    {
+                                        limpaMensagem();
+                                        gotoxy(1, 22);
+                                        printf("Nome do banco obrigatorio! Aperte ENTER: ");
+                                        getch();
+                                    }
+                                } while(conta.banco[0] == '\0');  
 
                                 break;
 
@@ -99,9 +116,26 @@ void alterarConta(ListaDupla *D)
                                 gotoxy(41, 8);
                                 printf("                                     ");
 
-                                gotoxy(41, 8);
-                                fflush(stdin);
-                                fgets(conta.agencia, 10, stdin);
+                                do
+                                {
+                                    limpaMensagem();
+                                    gotoxy(41, 8);
+                                    fflush(stdin);
+                                    
+                                    if ( fgets(conta.agencia, 10, stdin) != NULL)
+                                    {
+                                        conta.agencia[strcspn(conta.agencia, "\n")] = '\0';
+                                    }
+
+                                    if (conta.agencia[0] == '\0')
+                                    {
+                                        limpaMensagem();
+                                        gotoxy(1, 22);
+                                        printf("Numero da agencia obrigatorio! Aperte ENTER: ");
+                                        getch();
+                                    }
+
+                                } while (conta.agencia[0] == '\0');
 
                                 break;
 
@@ -109,9 +143,25 @@ void alterarConta(ListaDupla *D)
                                 gotoxy(41, 10);
                                 printf("                                     ");
 
-                                gotoxy(41, 10);
-                                fflush(stdin);
-                                fgets(conta.numero_conta, 20, stdin);
+                                do
+                                {
+                                    limpaMensagem();
+                                    gotoxy(41, 10);
+                                    fflush(stdin);
+                                    
+                                    if ( fgets(conta.numero_conta, 20, stdin) != NULL)
+                                    {
+                                        conta.numero_conta[strcspn(conta.numero_conta, "\n")] = '\0';
+                                    }
+
+                                    if (conta.numero_conta[0] == '\0')
+                                    {
+                                        limpaMensagem();
+                                        gotoxy(1, 22);
+                                        printf("Numero da conta obrigatorio! Aperte ENTER: ");
+                                        getch();
+                                    }
+                                } while (conta.numero_conta[0] == '\0');
 
                                 break;
 
@@ -119,36 +169,57 @@ void alterarConta(ListaDupla *D)
                                 gotoxy(41, 12);
                                 printf("                                     ");
 
-                                gotoxy(41, 12);
-                                fflush(stdin);
-                                fgets(conta.tipo_conta, 20, stdin);
+                                do
+                                {
+                                    limpaMensagem();
+                                    gotoxy(1, 22);
+                                    printf("Utilizar: 1 - Corrente / 2 - Poupanca / 3 - Cartao Credito");
+
+                                    gotoxy(41, 12);
+                                    scanf("%d", &tipo);
+
+                                    if (tipo < 1 || tipo > 3)
+                                    {
+                                        limpaMensagem();
+                                        gotoxy(1, 22);
+                                        printf("Opcao Invalida! Aperte ENTER: ");
+                                        getch();
+
+                                        gotoxy(41, 12);
+                                        printf("                                     ");
+                                    }
+                                } while (tipo < 1 || tipo > 3);
+
+                                if (tipo == 1)
+                                {
+                                    strcpy(conta.tipo_conta, "Corrente");
+
+                                    gotoxy(42, 12);
+                                    printf(" - Corrente");
+                                }
+                                else if (tipo == 2)
+                                {
+                                    strcpy(conta.tipo_conta, "Poupanca");
+
+                                    gotoxy(42, 12);
+                                    printf(" - Poupanca");
+                                }
+                                else
+                                {
+                                    strcpy(conta.tipo_conta, "Cartao Credito");
+
+                                    gotoxy(42, 12);
+                                    printf(" - Cartao Credito");
+                                }
 
                                 break;
 
                             case 5:
-                                gotoxy(41, 14);
-                                printf("                                     ");
-
-                                gotoxy(41, 14);
-                                scanf("%lf", &conta.vl_saldo);
-
-                                break;
-
                             case 6:
-                                gotoxy(41, 16);
-                                printf("                                     ");
-
-                                gotoxy(41, 16);
-                                scanf("%lf", &conta.vl_limite);
-
-                                break;
-
                             case 7:
-                                gotoxy(41, 18);
-                                printf("                                     ");
-
-                                gotoxy(41, 18);
-                                scanf("%d", &conta.status);
+                                gotoxy(1, 22);
+                                printf("Campo nao pode ser alterado! Aperte ENTER: ");
+                                getch();
 
                                 break;
 

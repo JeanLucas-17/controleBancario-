@@ -59,6 +59,8 @@ int main()
                 salvarDiscoConta(&D);
                 salvarDiscoMov(&S);
 
+                freeMalloc(&D, &S);
+
                 break;
 
             default:

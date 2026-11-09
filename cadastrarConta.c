@@ -61,18 +61,67 @@ void cadastrarConta(ListaDupla *D, int opcao)
 
             if (result == NULL)
             {
-                gotoxy(41, 6);
-                fflush(stdin);
-                fgets(conta.banco, 50, stdin);
+                do
+                {
+                    limpaMensagem();
+                    gotoxy(41, 6);
+                    fflush(stdin);
+                    
+                    if( fgets(conta.banco, 50, stdin) != NULL)
+                    {
+                        conta.banco[strcspn(conta.banco, "\n")] = '\0';
+                    }
 
-                gotoxy(41, 8);
-                fflush(stdin);
-                fgets(conta.agencia, 10, stdin);
+                    if (conta.banco[0] == '\0')
+                    {
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Nome do banco obrigatorio! Aperte ENTER: ");
+                        getch();
+                    }
+                } while(conta.banco[0] == '\0');  
 
-                gotoxy(41, 10);
-                fflush(stdin);
-                fgets(conta.numero_conta, 20, stdin);
+                do
+                {
+                    limpaMensagem();
+                    gotoxy(41, 8);
+                    fflush(stdin);
+                    
+                    if ( fgets(conta.agencia, 10, stdin) != NULL)
+                    {
+                        conta.agencia[strcspn(conta.agencia, "\n")] = '\0';
+                    }
 
+                    if (conta.agencia[0] == '\0')
+                    {
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Numero da agencia obrigatorio! Aperte ENTER: ");
+                        getch();
+                    }
+
+                } while (conta.agencia[0] == '\0');
+                
+                do
+                {
+                    limpaMensagem();
+                    gotoxy(41, 10);
+                    fflush(stdin);
+                    
+                    if ( fgets(conta.numero_conta, 20, stdin) != NULL)
+                    {
+                        conta.numero_conta[strcspn(conta.numero_conta, "\n")] = '\0';
+                    }
+
+                    if (conta.numero_conta[0] == '\0')
+                    {
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Numero da conta obrigatorio! Aperte ENTER: ");
+                        getch();
+                    }
+                } while (conta.numero_conta[0] == '\0');
+                
                 do
                 {
                     limpaMensagem();

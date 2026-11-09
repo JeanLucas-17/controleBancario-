@@ -109,11 +109,26 @@ void moviDebitoeCredito(ListaSimples *S, ListaDupla *D)
                     gotoxy(39,16);
                     printf("- Credito");
                 }
+                
+                do
+                {
+                    limpaMensagem();
+                    gotoxy(37, 17);
+                    fflush(stdin);
+                    
+                    if ( fgets(movi.ds_favorecido, 50, stdin) != NULL)
+                    {
+                        movi.ds_favorecido[strcspn(movi.ds_favorecido, "\n")] = '\0';
+                    }
 
-                limpaMensagem();
-                gotoxy(37, 17);
-                fflush(stdin);
-                fgets(movi.ds_favorecido, 50, stdin);
+                    if (movi.ds_favorecido[0] == '\0')
+                    {
+                        limpaMensagem();
+                        gotoxy(1, 22);
+                        printf("Nome do favorecido obrigatorio! Aperte ENTER: ");
+                        getch();
+                    }
+                } while (movi.ds_favorecido[0] == '\0');
 
                 if(y == 1)
                 {

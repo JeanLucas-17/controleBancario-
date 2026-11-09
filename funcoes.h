@@ -142,4 +142,7 @@ void consultaMov(ListaDupla *D, ListaSimples *S);
 void telaConsultaMovi();
 
 ApontMov pesquisaCodigoMovi(int codigo, ListaSimples *S);
+
+void freeMalloc(ListaDupla *D, ListaSimples *S);
+
 #endif

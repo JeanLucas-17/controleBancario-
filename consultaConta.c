@@ -196,6 +196,7 @@ void consultaConta(ListaDupla *D, int opcao)
                         y = 6;
 
                         mostraConta(conta, opcao, y);
+                        y++;
 
                         cabecalhoContas();
 
